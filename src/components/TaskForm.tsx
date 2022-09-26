@@ -1,7 +1,11 @@
 import { ChangeEvent, FormEvent, useRef } from "react";
 import { IoMdAdd } from "react-icons/io";
-import { FormTaskAction, Task } from "../interfaces/task/Task";
-import { v4 as uuidv4 } from "uuid";
+import {
+  CreateTask,
+  FormTaskAction,
+  Task,
+  UpdateTask,
+} from "../interfaces/task/Task";
 import { addTask, updateTask } from "./../features/tasks/taskSlice";
 import {
   setFormTask,
@@ -14,10 +18,13 @@ import { AiOutlineClear } from "react-icons/ai";
 
 type HandleForm = ChangeEvent<HTMLInputElement | HTMLTextAreaElement>;
 type HandleSubmit = FormEvent<HTMLFormElement>;
+type CompleteTask = CreateTask | UpdateTask;
 
 export default function TaskForm() {
   const dispatch = useDispatch();
-  const { action, task } = useSelector((state: RootState) => state.formTask);
+  const { action, task, id } = useSelector(
+    (state: RootState) => state.formTask
+  );
 
   const inputTitle = useRef<HTMLInputElement>(null);
 
@@ -27,21 +34,14 @@ export default function TaskForm() {
       ...task,
       [name]: value,
     };
-    dispatch(setFormTask({ action, task: updatedTask }));
-  };
-
-  const completeTask = (task: Task): Task => {
-    return {
-      ...task,
-      id: uuidv4(),
-    };
+    dispatch(setFormTask({ action, task: updatedTask, id }));
   };
 
   const hangleSubmit = (e: HandleSubmit) => {
     e.preventDefault();
-    const newTask: Task = (task.id === "" && completeTask(task)) || task;
-    if (action === FormTaskAction.CREATE) dispatch(addTask(newTask));
-    if (action === FormTaskAction.UPDATE) dispatch(updateTask(newTask));
+    if (action === FormTaskAction.CREATE) dispatch(addTask(task as CreateTask));
+    if (action === FormTaskAction.UPDATE)
+      dispatch(updateTask({ id, updateTask: task as UpdateTask }));
     clearForm();
   };
 

@@ -1,4 +1,4 @@
-import { FormTaskAction, Task } from "../interfaces/task/Task";
+import { FormTaskAction, Task, UpdateTask } from "../interfaces/task/Task";
 import { MdDeleteOutline } from "react-icons/md";
 import { removeTask, updateTask } from "./../features/tasks/taskSlice";
 import { useDispatch } from "react-redux";
@@ -23,11 +23,13 @@ export default function TaskCard(props: Props) {
       ...task,
       completed: !task.completed,
     };
-    dispatch(updateTask(updatedTask));
+    dispatch(
+      updateTask({ id: task.id, updateTask: updatedTask as UpdateTask })
+    );
   };
 
   const handleUpdate = () => {
-    dispatch(setFormTask({ action: FormTaskAction.UPDATE, task }));
+    dispatch(setFormTask({ action: FormTaskAction.UPDATE, task, id: task.id }));
   };
 
   return (

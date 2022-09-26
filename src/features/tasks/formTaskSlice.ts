@@ -3,8 +3,8 @@ import { FormTask, FormTaskAction } from "../../interfaces/task/Task";
 
 const initialState: FormTask = {
   action: FormTaskAction.CREATE,
+  id: "",
   task: {
-    id: "",
     title: "",
     description: "",
     completed: false,
@@ -18,6 +18,7 @@ export const formTaskSlice = createSlice({
     setFormTask: (state, action: { payload: FormTask }) => {
       state.action = action.payload.action;
       state.task = action.payload.task;
+      state.id = action.payload.id;
     },
     initialStateForm: (state) => {
       state.action = initialState.action;
