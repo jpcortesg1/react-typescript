@@ -1,24 +1,19 @@
 import { ChangeEvent, FormEvent, useRef } from "react";
 import { IoMdAdd } from "react-icons/io";
-import {
-  CreateTask,
-  FormTaskAction,
-  Task,
-  UpdateTask,
-} from "../interfaces/task/Task";
-import { addTask, updateTask } from "./../features/tasks/taskSlice";
+import { addTask, updateTask } from "./../../features/tasks/taskSlice";
 import {
   setFormTask,
   initialStateForm,
-} from "./../features/tasks/formTaskSlice";
+} from "./../../features/tasks/formTaskSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../app/store";
+import { RootState } from "../../app/store";
 import { BsPen } from "react-icons/bs";
 import { AiOutlineClear } from "react-icons/ai";
+import { CreateTask, UpdateTask } from "../../interfaces/task/Task.dto";
+import { FormTaskAction } from "../../interfaces/formTasks/FormTask";
 
 type HandleForm = ChangeEvent<HTMLInputElement | HTMLTextAreaElement>;
 type HandleSubmit = FormEvent<HTMLFormElement>;
-type CompleteTask = CreateTask | UpdateTask;
 
 export default function TaskForm() {
   const dispatch = useDispatch();

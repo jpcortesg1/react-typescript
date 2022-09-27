@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { FormTask, FormTaskAction } from "../../interfaces/task/Task";
+import { FormTask, FormTaskAction } from "../../interfaces/formTasks/FormTask";
 
 const initialState: FormTask = {
   action: FormTaskAction.CREATE,

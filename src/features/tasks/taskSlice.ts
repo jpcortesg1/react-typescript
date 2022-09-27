@@ -7,7 +7,6 @@ const initialState: Task[] = [];
 const completeTask = (task: CreateTask): Task => ({
   ...task,
   id: uuidv4(),
-  completed: true,
   createdAt: new Date().toISOString(),
   updatedAt: new Date().toISOString(),
 });

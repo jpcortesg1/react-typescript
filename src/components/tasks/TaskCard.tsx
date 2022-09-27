@@ -1,9 +1,11 @@
-import { FormTaskAction, Task, UpdateTask } from "../interfaces/task/Task";
+import { Task } from "../../interfaces/task/Task";
 import { MdDeleteOutline } from "react-icons/md";
-import { removeTask, updateTask } from "./../features/tasks/taskSlice";
+import { removeTask, updateTask } from "./../../features/tasks/taskSlice";
 import { useDispatch } from "react-redux";
 import { BsCircleFill, BsPen } from "react-icons/bs";
-import { setFormTask } from "./../features/tasks/formTaskSlice";
+import { setFormTask } from "./../../features/tasks/formTaskSlice";
+import { UpdateTask } from "../../interfaces/task/Task.dto";
+import { FormTaskAction } from "../../interfaces/formTasks/FormTask";
 
 interface Props {
   task: Task;
